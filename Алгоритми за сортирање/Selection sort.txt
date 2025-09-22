@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+void Selection_sort(vector<int>& a,int n)
+{
+    for(int i=0;i<n-1;i++)
+    {
+        int k=i;
+        for(int j=i+1;j<n;j++)
+        {
+            if(a[k]>a[j])
+            {
+                k=j;
+            }
+        }
+        if(k!=i)
+        {
+            swap(a[k],a[i]);
+        }
+
+
+    }
+}
+int main()
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distVal(1, 9000000);
+
+    int n=1000000;
+    vector<int> a(n);
+
+    for(int i=0;i<n;i++)
+    {
+      a[i] = distVal(gen);
+    }
+    Selection_sort(a,n);
+
+
+    return 0;
+}
+Овoj вид на сортирање се нарекува Selection sort и има временска сложеност О(n^2).  
+Функцијата има меморска сложеност О(1).
+Execution time (3 теста):
+-1. 40 минути и 10 секунди
+-2. 41 минути и 11 секунди
+-3. 162 минути 26 секунди

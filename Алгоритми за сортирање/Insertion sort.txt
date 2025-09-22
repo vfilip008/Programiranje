@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+void Insertion_sort(vector<int>& a,int n)
+{
+    for(int i=1;i<n;i++)
+    {
+        int kluc=a[i];
+        int j=i-1;
+        while(j>=0 && a[j]>kluc)
+        {
+            a[j+1]=a[j];
+            j--;
+        }
+        a[j+1]=kluc;
+
+    }
+}
+int main()
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distVal(1, 9000000);
+
+    int n=1000000;
+    vector<int> a(n);
+
+    for(int i=0;i<n;i++)
+    {
+      a[i] = distVal(gen);
+    }
+    Insertion_sort(a,n);
+
+    return 0;
+}
+Овoj вид на сортирање се нарекува Insertion sort и во најдобар случај кога низата е веќе сортирана има временска сложеност О(n).
+Но во обичен случај има временска сложеност О(n^2).
+Има мемориска сложеност О(1).  
+Exectution time (3 теста)
+-1. 27 минути и 54 секунди 
+-2. 27 минути и 43 секунди
+-3. 31 минути и 39 секунди
