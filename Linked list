@@ -46,7 +46,7 @@ struct List {
 };
 
 // ============================================================
-// =============== ZADACA 2: Merge ===================
+// =============== ZADACA 2: Merge & Unique ===================
 // ============================================================
 
 void addNode(List &L, int x) {
@@ -116,7 +116,7 @@ void insertionSort(List &L) {
 }
 
 // ============================================================
-// =============== ZADACA 4: Double Linked List ===============
+// =============== ZADACA 4: Doubly Linked List ===============
 // ============================================================
 
 struct DNode {
@@ -230,18 +230,25 @@ int main() {
     else if (choice == 4) {
         cout << "Задача 4: Doubly Linked List\n";
         DoublyList L;
-        L.add(5); L.add(2); L.add(9); L.add(7);
-        L.printForward();
-        L.printBackward();
+        int n, x;
+        cout << "Број на елементи: "; cin >> n;
+        cout << "Внеси ги " << n <<"-те елементи: ";
+        for (int i = 0; i < n; i++) {
+            cin >> x;
+            L.add(x);
+        }
+        cout << "Forward: "; L.printForward();
+        cout << "Backward: "; L.printBackward();
 
-        cout << "Бришење 9...\n";
-        L.remove(9);
-        L.printForward();
+        cout << "Внеси вредност за бришење: "; cin >> x;
+        L.remove(x);
+        cout << "после бришење (forward): "; L.printForward();
 
-        if (L.search(7))
-            cout << "Најдено теме со вредност 7\n";
+        cout << "Внеси вредност за пребарување: "; cin >> x;
+        if (L.search(x))
+            cout << "Теме најдено со вредност " << x << "\n";
         else
-            cout << "Теме 7 не е најден\n";
+            cout << "Теме " << x << " не е најден\n";
     }
     else {
         cout << "Неможе.\n";
