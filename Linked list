@@ -2,7 +2,7 @@
 using namespace std;
 
 // ============================================================
-// =============== Задача 1: Sorted Insert ====================
+// =============== Zadaca 1: Sorted Insert ====================
 // ============================================================
 
 struct Node {
@@ -46,7 +46,7 @@ struct List {
 };
 
 // ============================================================
-// =============== Задача 2: Merge  ===========================
+// ===============Zadaca 2: Merge  ===========================
 // ============================================================
 
 void addNode(List &L, int x) {
@@ -68,7 +68,7 @@ List mergeUnique(List &a, List &b) {
 }
 
 // ============================================================
-// =============== Задача 3: Sorting Lists ====================
+// =============== Zadaca 3: Sorting Lists ====================
 // ============================================================
 
 void bubbleSort(List &L) {
@@ -116,7 +116,7 @@ void insertionSort(List &L) {
 }
 
 // ============================================================
-// =============== Задача 4: Doublе Linked List ===============
+// =============== Zadaca 4: Doublе Linked List ===============
 // ============================================================
 
 struct DNode {
@@ -186,12 +186,12 @@ struct DoublyList {
 // ============================================================
 
 int main() {
-    cout << "Одбери Задача (1-4): ";
+    cout << "Choose Zadaci (1-4): ";
     int choice;
     cin >> choice;
 
     if (choice == 1) {
-        cout << "Задача 1: Sorted Insert\n";
+        cout << "Zadaca 1: Sorted Insert\n";
         int n, x;
         cin >> n;
         List L;
@@ -202,7 +202,7 @@ int main() {
         }
     }
     else if (choice == 2) {
-        cout << "Задача 2: Merge Two Lists (Unique Sorted)\n";
+        cout << "Zadaca 2: Merge Two Lists (Unique Sorted)\n";
         List a, b;
         int n, m, x;
         cin >> n;
@@ -213,7 +213,7 @@ int main() {
         c.print();
     }
     else if (choice == 3) {
-        cout << "Задача 3: Sorting List\n";
+        cout << "Zadaca 3: Sorting List\n";
         cout << "Одбери sort: 1-Bubble, 2-Selection, 3-Insertion: ";
         int type; cin >> type;
         int n, x;
@@ -228,11 +228,11 @@ int main() {
         L.print();
     }
     else if (choice == 4) {
-        cout << "Задача 4: Doubly Linked List\n";
+        cout << "Zadaca 4: Doubly Linked List\n";
         DoublyList L;
         int n, x;
-        cout << "Број на елементи: "; cin >> n;
-        cout << "Внеси ги " << n <<"-те елементи: ";
+        cout << "Number of elements: "; cin >> n;
+        cout << "Insert " << n <<" elements: ";
         for (int i = 0; i < n; i++) {
             cin >> x;
             L.add(x);
@@ -240,18 +240,18 @@ int main() {
         cout << "Forward: "; L.printForward();
         cout << "Backward: "; L.printBackward();
 
-        cout << "Внеси вредност за бришење: "; cin >> x;
+        cout << "Insert values for deleting: "; cin >> x;
         L.remove(x);
-        cout << "после бришење (forward): "; L.printForward();
+        cout << "after deletion (forward): "; L.printForward();
 
-        cout << "Внеси вредност за пребарување: "; cin >> x;
+        cout << "Insert value for search: "; cin >> x;
         if (L.search(x))
-            cout << "Теме најдено со вредност " << x << "\n";
+            cout << "Node found with value " << x << "\n";
         else
-            cout << "Теме " << x << " не е најден\n";
+            cout << "Node" << x << " not found\n";
     }
     else {
-        cout << "Неможе.\n";
+        cout << "Invalid.\n";
     }
 
     return 0;
