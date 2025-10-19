@@ -228,7 +228,7 @@ int main() {
         L.print();
     }
     else if (choice == 4) {
-        cout << "Zadaca 4: Doubly Linked List\n";
+        cout << "Zadaca 4: Double Linked List\n";
         DoublyList L;
         int n, x;
         cout << "Number of elements: "; cin >> n;
