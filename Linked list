@@ -1,0 +1,251 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ============================================================
+// =============== ZADACA 1: Sorted Insert ====================
+// ============================================================
+
+struct Node {
+    int val;
+    Node* next;
+    Node(int v) : val(v), next(nullptr) {}
+};
+
+struct List {
+    Node* head = nullptr;
+
+    void InsertSorted(int val) {
+        Node* n = new Node(val);
+        if (!head || val < head->val) {
+            n->next = head;
+            head = n;
+            return;
+        }
+        Node* t = head;
+        while (t->next && t->next->val < val)
+            t = t->next;
+        n->next = t->next;
+        t->next = n;
+    }
+
+    void print() {
+        for (Node* t = head; t; t = t->next)
+            cout << t->val << " ";
+        cout << "\n";
+    }
+
+    void clear() {
+        while (head) {
+            Node* tmp = head;
+            head = head->next;
+            delete tmp;
+        }
+    }
+
+    ~List() { clear(); }
+};
+
+// ============================================================
+// =============== ZADACA 2: Merge & Unique ===================
+// ============================================================
+
+void addNode(List &L, int x) {
+    Node* n = new Node(x);
+    n->next = L.head;
+    L.head = n;
+}
+
+List mergeUnique(List &a, List &b) {
+    vector<int> v;
+    for (Node* t = a.head; t; t = t->next) v.push_back(t->val);
+    for (Node* t = b.head; t; t = t->next) v.push_back(t->val);
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+    List c;
+    for (int i = (int)v.size() - 1; i >= 0; i--)
+        addNode(c, v[i]);
+    return c;
+}
+
+// ============================================================
+// =============== ZADACA 3: Sorting Lists ====================
+// ============================================================
+
+void bubbleSort(List &L) {
+    if (!L.head) return;
+    bool swapped;
+    do {
+        swapped = false;
+        Node *t = L.head;
+        while (t->next) {
+            if (t->val > t->next->val) {
+                swap(t->val, t->next->val);
+                swapped = true;
+            }
+            t = t->next;
+        }
+    } while (swapped);
+}
+
+void selectionSort(List &L) {
+    for (Node *i = L.head; i && i->next; i = i->next) {
+        Node *min = i;
+        for (Node *j = i->next; j; j = j->next)
+            if (j->val < min->val) min = j;
+        swap(i->val, min->val);
+    }
+}
+
+void insertionSort(List &L) {
+    Node *sorted = nullptr;
+    while (L.head) {
+        Node *x = L.head;
+        L.head = L.head->next;
+        if (!sorted || x->val < sorted->val) {
+            x->next = sorted;
+            sorted = x;
+        } else {
+            Node *t = sorted;
+            while (t->next && t->next->val < x->val)
+                t = t->next;
+            x->next = t->next;
+            t->next = x;
+        }
+    }
+    L.head = sorted;
+}
+
+// ============================================================
+// =============== ZADACA 4: Doubly Linked List ===============
+// ============================================================
+
+struct DNode {
+    int val;
+    DNode *prev, *next;
+    DNode(int v) : val(v), prev(nullptr), next(nullptr) {}
+};
+
+struct DoublyList {
+    DNode *head = nullptr, *tail = nullptr;
+
+    void add(int x) {
+        DNode *n = new DNode(x);
+        if (!head) head = tail = n;
+        else {
+            tail->next = n;
+            n->prev = tail;
+            tail = n;
+        }
+    }
+
+    void remove(int x) {
+        for (DNode *t = head; t; t = t->next) {
+            if (t->val == x) {
+                if (t->prev) t->prev->next = t->next;
+                else head = t->next;
+                if (t->next) t->next->prev = t->prev;
+                else tail = t->prev;
+                delete t;
+                return;
+            }
+        }
+    }
+
+    DNode* search(int x) {
+        for (DNode *t = head; t; t = t->next)
+            if (t->val == x) return t;
+        return nullptr;
+    }
+
+    void printForward() {
+        for (DNode *t = head; t; t = t->next)
+            cout << t->val << " ";
+        cout << "\n";
+    }
+
+    void printBackward() {
+        for (DNode *t = tail; t; t = t->prev)
+            cout << t->val << " ";
+        cout << "\n";
+    }
+
+    void clear() {
+        while (head) {
+            DNode *tmp = head;
+            head = head->next;
+            delete tmp;
+        }
+        tail = nullptr;
+    }
+
+    ~DoublyList() { clear(); }
+};
+
+// ============================================================
+// ======================== MAIN ==============================
+// ============================================================
+
+int main() {
+    cout << "Одбери Задача (1-4): ";
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) {
+        cout << "Задача 1: Sorted Insert\n";
+        int n, x;
+        cin >> n;
+        List L;
+        for (int i = 0; i < n; i++) {
+            cin >> x;
+            L.InsertSorted(x);
+            L.print();
+        }
+    }
+    else if (choice == 2) {
+        cout << "Задача 2: Merge Two Lists (Unique Sorted)\n";
+        List a, b;
+        int n, m, x;
+        cin >> n;
+        for (int i = 0; i < n; i++) { cin >> x; addNode(a, x); }
+        cin >> m;
+        for (int i = 0; i < m; i++) { cin >> x; addNode(b, x); }
+        List c = mergeUnique(a, b);
+        c.print();
+    }
+    else if (choice == 3) {
+        cout << "Задача 3: Sorting List\n";
+        cout << "Одбери sort: 1-Bubble, 2-Selection, 3-Insertion: ";
+        int type; cin >> type;
+        int n, x;
+        cin >> n;
+        List L;
+        for (int i = 0; i < n; i++) { cin >> x; addNode(L, x); }
+
+        if (type == 1) bubbleSort(L);
+        else if (type == 2) selectionSort(L);
+        else insertionSort(L);
+
+        L.print();
+    }
+    else if (choice == 4) {
+        cout << "Задача 4: Doubly Linked List\n";
+        DoublyList L;
+        L.add(5); L.add(2); L.add(9); L.add(7);
+        L.printForward();
+        L.printBackward();
+
+        cout << "Бришење 9...\n";
+        L.remove(9);
+        L.printForward();
+
+        if (L.search(7))
+            cout << "Најдено теме со вредност 7\n";
+        else
+            cout << "Теме 7 не е најден\n";
+    }
+    else {
+        cout << "Неможе.\n";
+    }
+
+    return 0;
+}
