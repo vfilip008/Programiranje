@@ -214,7 +214,7 @@ int main() {
     }
     else if (choice == 3) {
         cout << "Zadaca 3: Sorting List\n";
-        cout << "Одбери sort: 1-Bubble, 2-Selection, 3-Insertion: ";
+        cout << "Choose sort: 1-Bubble, 2-Selection, 3-Insertion: ";
         int type; cin >> type;
         int n, x;
         cin >> n;
